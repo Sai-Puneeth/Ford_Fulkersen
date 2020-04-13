@@ -1,6 +1,6 @@
-#Ford Fulkesen for network flow
+# Ford Fulkesen for network flow
 
-##List of Tasks
+## List of Tasks
 * Task 1: To implement the Ford-Fulkerson Algorithm
 * Task 2: Implement the subroutine to find the minimum st-cut of a network flow graph
 * Task 3: Using Ford-Fulkerson algorithm for solving Bipartite Matching problem
