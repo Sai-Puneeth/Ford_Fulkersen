@@ -13,7 +13,7 @@ class Graph{
 	public:
 		vector <long long int > nodes;
 		vector <vector<long long int > > edges;
-		vector <long long int > nodes;
+		vector <long long int > weights;
 		vector <vector<long long int>> G;
 		vector <vector<long long int>> GT;
 		long long int max;
@@ -21,7 +21,7 @@ class Graph{
 		Its Constructor takes in the node vector and the edge pairs vector as its input parameters and stores them.
 		It also iniatializes the G and GT of the Graph 
 		*/
-		Graph(vector<long long int> N, vector<vector<long long int>> E){
+		Graph(vector<long long int> N, vector<vector<long long int>> E, vector <long long int > W){
 
 			for(auto i:N){
 				nodes.push_back(i);
@@ -31,17 +31,14 @@ class Graph{
 				v6.push_back(row[0]);	v6.push_back(row[1]);
 				edges.push_back(v6);
 			}
+			for(auto i:W){
+				weights.push_back(i);
+			}
+
 			if(nodes.size()!=0){
 			max = *max_element(nodes.begin(), nodes.end())+1;
-			// cout<<"Adiya"<<endl;
-			// cout<<edges[2][1];
 			initGandGT();
-			// cout<<"asjdbhasd";
 			makeGandGT();
-			// cout<<"======================================="<<endl;
-			// cout<<"The adjacency matrix of the Graph is: "<<endl;
-			// printG(0);
-			// cout<<"========================================"<<endl;
 		}
 		}
 
@@ -72,7 +69,6 @@ If trans = 0
 
 void Graph :: printG(int trans){
 	if(!trans){
-		// cout<<"Hi";
 		for(auto i: G){
 			for(auto j:i){
 				cout<<j<<" ";
@@ -92,14 +88,10 @@ void Graph :: printG(int trans){
 }
 
 void Graph :: makeGandGT(){
-	// cout<<edges.size();
 	long long int a,b;
 	for(long long int i=0;i<edges.size();i++){
 		a=edges[i][0];	b=edges[i][1];
-		G[a][b] = 1;
-		GT[b][a] = 1;
-		// cout<<i;
+		G[a][b] = weights[i];
 	}
-	// cout<<"sdf";
 	return;
 }

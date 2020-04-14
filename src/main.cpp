@@ -1,13 +1,13 @@
 #include<bits/stdc++.h>
 #include <chrono> 
 #include "Ford_Fulkersen.h"
+#include "Graph.h"
 
 #define ll long long int
 using namespace std;
 using namespace std::chrono; 
 
-
-bool fileReadInput = true
+bool fileReadInput = true;
 
 int main(int argc, const char** argv) {
     ifstream in("../data/1.txt");
@@ -31,6 +31,7 @@ int main(int argc, const char** argv) {
 
 	vector<ll> nodes;
 	vector<vector<ll>> edges;
+	vector<ll> weights;
 
 	//Making nodes vector
 	for(ll i=0;i<nodes_no;i++){
@@ -39,21 +40,24 @@ int main(int argc, const char** argv) {
 
 	if(!fileReadInput)
 		cout<<"Enter the edges(0 is the first vertex):"<<endl;
-	//Making edges vector
 	for(ll i=0;i<edges_no;i++){
-		vector<ll> v;	int a,b;
-		cin>>a;	cin>>b;	v.push_back(a);v.push_back(b);
+		vector<ll> v;	ll a,b,c;
+		cin>>a;	cin>>b; cin>>c;	v.push_back(a);v.push_back(b);weights.push_back(c);
 		edges.push_back(v);
 	}
-	// cout<<edges.size()<<"\n\n";
-	cout<<"=========================="<<endl;
 
+	if(!fileReadInput)
+		cout<<"=========================="<<endl;
+
+	Graph *G;
+	G = new Graph(nodes,edges,weights);
+	G->printG(0);
+
+	cout<<"STARTED!!!!!!"<<endl;
+	// your function HERE
+	cout<<"COMPLETE!!!!!!"<<endl;
 
     auto start = high_resolution_clock::now();
-
-
-
-
     auto stop = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop - start);
     cout << duration.count() << endl;
