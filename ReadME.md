@@ -1,4 +1,4 @@
-# Ford Fulkesen for network flow
+# Ford Fulkersen for network flow
 
 ## List of Tasks
 * __Task 1__: To implement the Ford-Fulkerson Algorithm
