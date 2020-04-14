@@ -3,6 +3,7 @@
 #include "Ford_Fulkersen.h"
 
 using namespace std;
+using namespace std::chrono;
 
 int main(int argc, const char** argv) {
     std::ifstream in("../data/1.txt");
@@ -14,7 +15,7 @@ int main(int argc, const char** argv) {
 
 
     auto stop = high_resolution_clock::now();
-    auto duration = duration_cast<microseconds>(stop - start);
+    auto duration = duration_cast<std::chrono::microseconds>(stop - start);
     cout << duration.count() << endl;
     return 0;
 }
