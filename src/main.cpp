@@ -3,6 +3,7 @@
 #include "Ford_Fulkersen.h"
 
 using namespace std;
+using namespace std::chrono; 
 
 int main(int argc, const char** argv) {
     std::ifstream in("../data/1.txt");
