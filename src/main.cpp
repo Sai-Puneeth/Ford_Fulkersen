@@ -52,6 +52,11 @@ int main(int argc, const char** argv) {
 	Graph *G;
 	G = new Graph(nodes,edges,weights);
 	G->printG(0);
+	long long int t = G->sink();
+	long long int s = G->source();
+
+	cout<<s<<endl;
+	cout<<t<<endl;
 
 	cout<<"STARTED!!!!!!"<<endl;
 	// your function HERE

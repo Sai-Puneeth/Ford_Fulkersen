@@ -45,6 +45,8 @@ class Graph{
 		void initGandGT();
 		void makeGandGT();
 		void printG(int trans);
+		long long int  sink();
+		long long int source();
 
 };
 
@@ -94,4 +96,32 @@ void Graph :: makeGandGT(){
 		G[a][b] = weights[i];
 	}
 	return;
+}
+
+long long int Graph :: source(){
+	long long int sum=0;
+	for(long long int i=0;i<nodes.size();i++){
+		for(long long int j=0;j<nodes.size();j++){
+			sum+=G[j][i];
+		}
+		if(sum == 0){
+			cout<<i<<endl;
+			return i;	
+		}
+		else{sum=0;}
+	}
+}
+
+long long int Graph :: sink(){
+	long long int sum=0;
+	for(long long int i=0;i<nodes.size();i++){
+		for(long long int j=0;j<nodes.size();j++){
+			sum+=G[i][j];
+		}
+		if(sum == 0){
+			cout<<i<<endl;
+			return i;	
+		}
+		else{sum=0;}
+	}
 }
