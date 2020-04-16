@@ -60,6 +60,7 @@ int main(int argc, const char** argv) {
 
 	cout<<"STARTED!!!!!!"<<endl;
 	// your function HERE
+	Ford_Fulkerson();
 	cout<<"COMPLETE!!!!!!"<<endl;
 
     auto start = high_resolution_clock::now();
