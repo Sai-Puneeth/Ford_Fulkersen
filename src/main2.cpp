@@ -34,7 +34,7 @@ int main(int argc, const char** argv) {
 	vector<ll> weights;
 
 	//Making nodes vector   
-	for(ll i=0;i<nodes_no;i++){
+	for(ll i=0;i<nodes_no+2;i++){           // changed nodes_no to nodes_no +2
 		nodes.push_back(i);
 	}
 
@@ -52,12 +52,15 @@ int main(int argc, const char** argv) {
 	Graph *G;
 	G = new Graph(nodes,edges,weights);
 	//G->printG(0);
-	long long int t = G->sink();
-	long long int s = G->source();
+	// long long int t = G->sink();
+	// long long int s = G->source();
+    long long int s = nodes_no;
+    long long int t = nodes_no + 1;
 
 	auto start = high_resolution_clock::now();
 	cout<<"STARTED!!!!!!"<<endl;
 	// your function HERE
+    bool flag = G.isBipartite()
 	Ford_Fulkersen F(G,s,t);
 	long long int maxflow = 0;
 	while (true)

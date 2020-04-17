@@ -47,6 +47,7 @@ class Graph{
 		void printG(int trans);
 		long long int  sink();
 		long long int source();
+		bool isBipartite();
 
 };
 
@@ -64,7 +65,7 @@ void Graph :: initGandGT(){
 
 /*!
 This function prints the adjacency matix of the graph or its transpose.
-@Parameter: int trans
+@Parameter: long long int trans
 If trans=1 the transpose matrix is printed
 If trans = 0
 */
@@ -91,7 +92,7 @@ void Graph :: printG(int trans){
 
 void Graph :: makeGandGT(){
 	long long int a,b;
-	for(long long int i=0;i<edges.size();i++){
+	for(long int i=0;i<edges.size();i++){
 		a=edges[i][0];	b=edges[i][1];
 		G[a][b] = weights[i];
 	}
@@ -105,7 +106,6 @@ long long int Graph :: source(){
 			sum+=G[j][i];
 		}
 		if(sum == 0){
-			cout<<i<<endl;
 			return i;	
 		}
 		else{sum=0;}
@@ -119,9 +119,38 @@ long long int Graph :: sink(){
 			sum+=G[i][j];
 		}
 		if(sum == 0){
-			cout<<i<<endl;
 			return i;	
 		}
 		else{sum=0;}
 	}
+}
+
+bool Graph :: isBipartite() 
+{
+	long long int colorArr[nodes.size()]; 
+	for (long long int i = 0; i < nodes.size(); ++i) 	colorArr[i] = -1; 
+
+	colorArr[0] = 1; 
+	queue <long long int> q; 
+	q.push(0); 
+
+	while (!q.empty()) 
+	{
+		long long int u = q.front(); 
+		q.pop(); 
+		if (G[u][u] == 1) 
+		return false;  
+
+		for (long long int v = 0; v < nodes.size(); ++v) 
+		{
+			if (G[u][v] && colorArr[v] == -1) 
+			{ 
+				colorArr[v] = 1 - colorArr[u]; 
+				q.push(v); 
+			} 
+			else if (G[u][v] && colorArr[v] == colorArr[u]) 
+				return false; 
+		} 
+	} 
+	return true; 
 }
