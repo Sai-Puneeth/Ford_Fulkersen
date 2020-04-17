@@ -151,6 +151,11 @@ bool Graph :: isBipartite()
 			else if (G[u][v] && colorArr[v] == colorArr[u]) 
 				return false; 
 		} 
-	} 
+	}
+	//adding sink and source to bipartite graph
+	for(auto i : colorArr){
+		if(colorArr[i]) G[i][nodes.size()-2]=1;
+		else G[i][nodes.size()-1]=1;
+	}
 	return true; 
 }

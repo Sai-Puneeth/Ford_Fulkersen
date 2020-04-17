@@ -60,7 +60,8 @@ int main(int argc, const char** argv) {
 	auto start = high_resolution_clock::now();
 	cout<<"STARTED!!!!!!"<<endl;
 	// your function HERE
-    bool flag = G.isBipartite()
+    bool flag = G->isBipartite();
+	cout<<flag<<endl;
 	Ford_Fulkersen F(G,s,t);
 	long long int maxflow = 0;
 	while (true)
