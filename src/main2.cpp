@@ -42,7 +42,7 @@ int main(int argc, const char** argv) {
 		cout<<"Enter the edges(0 is the first vertex):"<<endl;
 	for(ll i=0;i<edges_no;i++){
 		vector<ll> v;	ll a,b,c;
-		cin>>a;	cin>>b; cin>>c;	v.push_back(a);v.push_back(b);weights.push_back(c);
+		cin>>a;	cin>>b;	cin>>c; v.push_back(a);v.push_back(b);weights.push_back(c);
 		edges.push_back(v);
 	}
 
@@ -51,9 +51,7 @@ int main(int argc, const char** argv) {
 
 	Graph *G;
 	G = new Graph(nodes,edges,weights);
-	//G->printG(0);
-	// long long int t = G->sink();
-	// long long int s = G->source();
+
     long long int s = nodes_no;
     long long int t = nodes_no + 1;
 
@@ -61,7 +59,7 @@ int main(int argc, const char** argv) {
 	cout<<"STARTED!!!!!!"<<endl;
 	// your function HERE
     bool flag = G->isBipartite();
-	cout<<flag<<endl;
+	// cout<<flag<<endl;
 	Ford_Fulkersen F(G,s,t);
 	long long int maxflow = 0;
 	while (true)
@@ -70,7 +68,7 @@ int main(int argc, const char** argv) {
 		if  (flow == 0) break;
 		else{ 
 			F.augment(flow,s,t);
-			maxflow += flow; 
+			maxflow += flow;
 		}
 	}
 	cout<<maxflow<<endl;
@@ -78,6 +76,6 @@ int main(int argc, const char** argv) {
 
     auto stop = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop - start);
-    cout << duration.count() << endl;
+    cout << "Time taken in microseconds: "<< duration.count() << endl;
     return 0;
 }
