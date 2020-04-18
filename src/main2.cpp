@@ -10,7 +10,8 @@ using namespace std::chrono;
 bool fileReadInput = true;
 
 int main(int argc, const char** argv) {
-    ifstream in("../data/2.txt");
+    // ifstream in("../data/Newman-Cond_mat_95-99-two_mode.txt");
+	ifstream in("../data/3.txt");
     streambuf *cinbuf = cin.rdbuf(); //save old buf
     cin.rdbuf(in.rdbuf());
 
@@ -41,8 +42,8 @@ int main(int argc, const char** argv) {
 	if(!fileReadInput)
 		cout<<"Enter the edges(0 is the first vertex):"<<endl;
 	for(ll i=0;i<edges_no;i++){
-		vector<ll> v;	ll a,b,c;
-		cin>>a;	cin>>b; cin>>c;	v.push_back(a);v.push_back(b);weights.push_back(c);
+		vector<ll> v;	ll a,b;
+		cin>>a;	cin>>b; v.push_back(a);v.push_back(b);weights.push_back(1);
 		edges.push_back(v);
 	}
 
@@ -51,17 +52,12 @@ int main(int argc, const char** argv) {
 
 	Graph *G;
 	G = new Graph(nodes,edges,weights);
-	//G->printG(0);
-	// long long int t = G->sink();
-	// long long int s = G->source();
     long long int s = nodes_no;
     long long int t = nodes_no + 1;
 
 	auto start = high_resolution_clock::now();
 	cout<<"STARTED!!!!!!"<<endl;
-	// your function HERE
     bool flag = G->isBipartite();
-	cout<<flag<<endl;
 	Ford_Fulkersen F(G,s,t);
 	long long int maxflow = 0;
 	while (true)
@@ -70,14 +66,14 @@ int main(int argc, const char** argv) {
 		if  (flow == 0) break;
 		else{ 
 			F.augment(flow,s,t);
-			maxflow += flow; 
+			maxflow += flow;
 		}
 	}
-	cout<<maxflow<<endl;
+	cout<<"The maximum number of students that get jobs: "<<maxflow<<endl;
 	cout<<"COMPLETE!!!!!!"<<endl;
 
     auto stop = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(stop - start);
-    cout << duration.count() << endl;
+    cout << "Time taken in microseconds: "<< duration.count() << endl;
     return 0;
 }

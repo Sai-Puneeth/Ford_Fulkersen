@@ -96,6 +96,10 @@ void Graph :: makeGandGT(){
 		a=edges[i][0];	b=edges[i][1];
 		G[a][b] = weights[i];
 	}
+	for(long int i=0;i<edges.size();i++){
+		a=edges[i][0];	b=edges[i][1];
+		GT[b][a] = weights[i];
+	}
 	return;
 }
 
@@ -131,31 +135,52 @@ bool Graph :: isBipartite()
 	for (long long int i = 0; i < nodes.size(); ++i) 	colorArr[i] = -1; 
 
 	colorArr[0] = 1; 
-	queue <long long int> q; 
-	q.push(0); 
-
-	while (!q.empty()) 
-	{
-		long long int u = q.front(); 
-		q.pop(); 
-		if (G[u][u] == 1) 
-		return false;  
-
-		for (long long int v = 0; v < nodes.size(); ++v) 
-		{
-			if (G[u][v] && colorArr[v] == -1) 
-			{ 
-				colorArr[v] = 1 - colorArr[u]; 
-				q.push(v); 
-			} 
-			else if (G[u][v] && colorArr[v] == colorArr[u]) 
-				return false; 
-		} 
-	}
+  
+    // Create a queue (FIFO) of vertex numbers a 
+    // nd enqueue source vertex for BFS traversal 
+    queue <int> q; 
+    q.push(0); 
+  
+    // Run while there are vertices in queue (Similar to BFS) 
+    while (!q.empty()) 
+    { 
+        // Dequeue a vertex from queue ( Refer http://goo.gl/35oz8 ) 
+        int u = q.front(); 
+        q.pop(); 
+  
+        // Return false if there is a self-loop  
+        if (G[u][u] == 1 || GT[u][u] == 1) 
+        return false;  
+  
+        // Find all non-colored adjacent vertices 
+        for (int v = 0; v < nodes.size(); ++v) 
+        { 
+            // An edge from u to v exists and 
+            // destination v is not colored 
+            if ((G[u][v] || GT[u][v]) && colorArr[v] == -1) 
+            { 
+                // Assign alternate color to this 
+                // adjacent v of u 
+                colorArr[v] = 1 - colorArr[u]; 
+                q.push(v); 
+            } 
+  
+            // An edge from u to v exists and destination 
+            // v is colored with same color as u 
+            else if ((G[u][v] || GT[u][v]) && colorArr[v] == colorArr[u]) 
+                return false; 
+        } 
+    } 
 	//adding sink and source to bipartite graph
+	int k = 0;
 	for(auto i : colorArr){
-		if(colorArr[i]) G[i][nodes.size()-2]=1;
-		else G[i][nodes.size()-1]=1;
+		// cout<<i<<"\t";
+		if(i>0) G[nodes.size()-2][k]=1;
+		else G[k][nodes.size()-1]=1;
+		k++;
 	}
+	G[nodes.size()-2][nodes.size()-1] = 0;
+	G[nodes.size()-1][nodes.size()-1] = 0;
+	// cout<<endl;
 	return true; 
 }
