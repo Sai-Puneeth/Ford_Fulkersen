@@ -7,6 +7,10 @@ class Ford_Fulkersen{
         vector<long long int> parent;
         Graph *Gr ;
 
+        /*!
+        this is the constructor for this class it takes the graph object,source,sink as input and initialises parent array and adjacency matrix
+        */
+
         Ford_Fulkersen(Graph *G,long long int s,long long int t){
             Gr = G;
             for (long long int i=0;i<Gr->nodes.size();i++) parent.push_back(0);
@@ -14,7 +18,7 @@ class Ford_Fulkersen{
         long long int DFS(long long int s,long long int t);
         void augment(long long int flow,long long int s,long long int t);
     };
-        //DFS to find flow and store path in the form of parent vector
+        //DFS fuction takes source and sink as input to find flow and store path in the form of parent vector
     long long int Ford_Fulkersen :: DFS(long long int s,long long int t){
         int flow = 0;
         for (int i=0;i<Gr->nodes.size();i++) parent[i] = -1;
@@ -48,7 +52,7 @@ class Ford_Fulkersen{
     }
 
 
-    // augmenting the graph after finding a path
+    // augmenting the graph after finding a path takes flow,source,sink as input and returns residue graph Gr' as output
     void Ford_Fulkersen :: augment(long long int flow,long long int s,long long int t){
         if (flow > 0){
             int currNode = t;

@@ -10,8 +10,8 @@ using namespace std::chrono;
 bool fileReadInput = true;
 
 int main(int argc, const char** argv) {
-    // ifstream in("../data/Newman-Cond_mat_95-99-two_mode.txt");
-	ifstream in("../data/3.txt");
+    ifstream in("../data/Newman-Cond_mat_95-99-two_mode.txt");
+	// ifstream in("../data/3.txt");
     streambuf *cinbuf = cin.rdbuf(); //save old buf
     cin.rdbuf(in.rdbuf());
 
