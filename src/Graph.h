@@ -181,6 +181,6 @@ bool Graph :: isBipartite()
 	}
 	G[nodes.size()-2][nodes.size()-1] = 0;
 	G[nodes.size()-1][nodes.size()-1] = 0;
-	cout<<endl;
+	// cout<<endl;
 	return true; 
 }
